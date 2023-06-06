@@ -11,6 +11,17 @@ CREATE TABLE web_events (
   conversion_status VARCHAR2(20)
 );
 
+CREATE TABLE mobile_events (
+  event_id NUMBER,
+  event_type VARCHAR2(50),
+  event_timestamp TIMESTAMP,
+  user_id NUMBER,
+  app_name VARCHAR2(50),
+  operating_system VARCHAR2(50),
+  country VARCHAR2(50),
+  duration_seconds NUMBER,
+  conversion_status VARCHAR2(20)
+);
 
 INSERT INTO web_events (event_id, event_type, event_timestamp, user_id, page_url, browser, device_type, country, duration_seconds, conversion_status)
 SELECT
@@ -48,19 +59,6 @@ SELECT
 FROM dual
 CONNECT BY level <= 100;
 
-
-
-CREATE TABLE mobile_events (
-  event_id NUMBER,
-  event_type VARCHAR2(50),
-  event_timestamp TIMESTAMP,
-  user_id NUMBER,
-  app_name VARCHAR2(50),
-  operating_system VARCHAR2(50),
-  country VARCHAR2(50),
-  duration_seconds NUMBER,
-  conversion_status VARCHAR2(20)
-);
 
 
 INSERT INTO mobile_events (event_id, event_type, event_timestamp, user_id, app_name, operating_system, country, duration_seconds, conversion_status)
