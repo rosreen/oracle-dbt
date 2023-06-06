@@ -1,3 +1,5 @@
+/* creating a table (web_events) that measures relevant web_event metrics such as event id, event type, timestamps, device types, etc. */
+
 CREATE TABLE web_events (
   event_id NUMBER,
   event_type VARCHAR2(50),
@@ -11,6 +13,7 @@ CREATE TABLE web_events (
   conversion_status VARCHAR2(20)
 );
 
+/* inserting 10,000,000 randomly generated rows into the web_events table */
 
 INSERT INTO web_events (event_id, event_type, event_timestamp, user_id, page_url, browser, device_type, country, duration_seconds, conversion_status)
 SELECT
@@ -46,9 +49,9 @@ SELECT
     ELSE 'In Progress'
   END AS conversion_status
 FROM dual
-CONNECT BY level <= 100;
+CONNECT BY level <= 10000000;
 
-
+/* creating a table (mobile_events) that measures relevant mobile_event metrics such as event id, event type, timestamps, operating systems, etc. */
 
 CREATE TABLE mobile_events (
   event_id NUMBER,
@@ -62,6 +65,8 @@ CREATE TABLE mobile_events (
   conversion_status VARCHAR2(20)
 );
 
+
+/* inserting 10,000,000 randomly generated rows into the mobile_events table */
 
 INSERT INTO mobile_events (event_id, event_type, event_timestamp, user_id, app_name, operating_system, country, duration_seconds, conversion_status)
 SELECT
@@ -93,4 +98,4 @@ SELECT
   ELSE 'In Progress'
  END AS conversion_status
 FROM dual
-CONNECT BY level <= 100;
+CONNECT BY level <= 10000000;
