@@ -1,3 +1,4 @@
+
 with start_web_events_cleaned as (
 
     select * from {{ ref('stg_web_events') }}
@@ -96,14 +97,14 @@ SELECT
 FROM categorized_mobile_events;
 ),
 
-event_counts_by_platform as (
+average_duration_by_platform_country as (
 
-    SELECT
+SELECT
   platform,
-
-  COUNT(*) AS event_count
+  country,
+  AVG(CASE WHEN platform = 'Web' THEN web_duration_seconds ELSE mobile_duration_seconds END) AS avg_duration
 FROM combined_categorized_events
-GROUP BY platform;
+GROUP BY platform, country;
 )
 
-select * from event_counts_by_platform
+select * from average_duration_by_platform_country
