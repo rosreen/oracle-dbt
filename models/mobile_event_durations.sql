@@ -6,7 +6,7 @@ with start_web_events_cleaned as (
 start_mobile_events_cleaned as (
 
     select * from {{ ref('stg_mobile_events') }}
-)
+),
 
 combined_events as (
     
@@ -30,7 +30,7 @@ SELECT
   m.duration_seconds AS mobile_duration_seconds,
   m.conversion_status AS mobile_conversion_status
 FROM start_web_events_cleaned w
-JOIN start_mobile_events_cleaned m ON w.event_id = m.event_id;
+JOIN start_mobile_events_cleaned m ON w.event_id = m.event_id
 
 ),
 
@@ -39,7 +39,7 @@ SELECT
   operating_system,
   AVG(mobile_duration_seconds) AS avg_duration
 FROM combined_events
-GROUP BY operating_system;
+GROUP BY operating_system
 )
 
-select * from mobile_event_durations  
+select * from mobile_event_durations

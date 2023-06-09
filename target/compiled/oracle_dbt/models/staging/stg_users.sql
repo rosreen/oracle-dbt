@@ -1,11 +1,11 @@
 with users as (
 
-    select * from {{ ref('raw_users') }}
+    select * from FAWDBTCORE.raw_users
 ),
 
 users_cleaned as (
     SELECT DISTINCT *
-    FROM users;
+    FROM users
 )
 
 select * from users_cleaned

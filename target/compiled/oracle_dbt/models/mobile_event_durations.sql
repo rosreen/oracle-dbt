@@ -1,11 +1,11 @@
 with start_web_events_cleaned as (
 
-    select * from {{ ref('stg_web_events') }}
+    select * from FAWDBTCORE.stg_web_events
 ),
 
 start_mobile_events_cleaned as (
 
-    select * from {{ ref('stg_mobile_events') }}
+    select * from FAWDBTCORE.stg_mobile_events
 ),
 
 combined_events as (
@@ -34,12 +34,12 @@ JOIN start_mobile_events_cleaned m ON w.event_id = m.event_id
 
 ),
 
-web_event_counts as (
-    SELECT
-  web_event_type,
-  COUNT(*) AS event_count
+mobile_event_durations as (
+SELECT
+  operating_system,
+  AVG(mobile_duration_seconds) AS avg_duration
 FROM combined_events
-GROUP BY web_event_type
+GROUP BY operating_system
 )
 
-select * from web_event_counts
+select * from mobile_event_durations

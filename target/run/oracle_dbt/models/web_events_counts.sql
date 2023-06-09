@@ -1,11 +1,14 @@
-with start_web_events_cleaned as (
 
-    select * from {{ ref('stg_web_events') }}
+  
+  create or replace view FAWDBTCORE.web_events_counts as
+    with start_web_events_cleaned as (
+
+    select * from FAWDBTCORE.stg_web_events
 ),
 
 start_mobile_events_cleaned as (
 
-    select * from {{ ref('stg_mobile_events') }}
+    select * from FAWDBTCORE.stg_mobile_events
 ),
 
 combined_events as (
@@ -43,3 +46,4 @@ GROUP BY web_event_type
 )
 
 select * from web_event_counts
+

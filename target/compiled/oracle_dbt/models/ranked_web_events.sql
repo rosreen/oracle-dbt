@@ -1,6 +1,6 @@
 with start_ranked_web_events as (
 
-    select * from {{ ref('stg_web_events') }}
+    select * from FAWDBTCORE.stg_web_events
 
 ),
 

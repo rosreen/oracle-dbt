@@ -25,7 +25,7 @@ SELECT
     WHEN duration_seconds < 300 THEN 'Medium'
     ELSE 'Long'
   END AS duration_category
-FROM web_events_cleaned;
+FROM web_events_cleaned
 
 
 ),
@@ -45,7 +45,7 @@ SELECT
     WHEN conversion_status = 'Completed' THEN 'Successful'
     ELSE 'Unsuccessful'
   END AS conversion_category
-FROM mobile_events_cleaned;
+FROM mobile_events_cleaned
 ),
 
 
@@ -93,7 +93,7 @@ SELECT
   'Mobile' AS platform,
   NULL AS web_duration_seconds,
   duration_seconds AS mobile_duration_seconds
-FROM categorized_mobile_events;
+FROM categorized_mobile_events
 ),
 
 event_counts_by_platform as (
@@ -103,7 +103,7 @@ event_counts_by_platform as (
 
   COUNT(*) AS event_count
 FROM combined_categorized_events
-GROUP BY platform;
+GROUP BY platform
 )
 
 select * from event_counts_by_platform

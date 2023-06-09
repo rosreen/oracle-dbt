@@ -1,6 +1,9 @@
-with start_ranked_web_events as (
 
-    select * from {{ ref('stg_web_events') }}
+  
+  create or replace view FAWDBTCORE.ranked_web_events as
+    with start_ranked_web_events as (
+
+    select * from FAWDBTCORE.stg_web_events
 
 ),
 
@@ -23,3 +26,4 @@ FROM start_ranked_web_events
 )
 
 select * from ranked_web_events
+

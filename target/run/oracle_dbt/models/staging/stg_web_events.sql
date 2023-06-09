@@ -1,4 +1,7 @@
-with web_events_extracted as (
+
+  
+  create or replace view FAWDBTCORE.stg_web_events as
+    with web_events_extracted as (
 
     SELECT
   event_id,
@@ -20,3 +23,4 @@ web_events_cleaned as (
 )
 
 select * from web_events_cleaned
+

@@ -1,4 +1,7 @@
-with mobile_events_extracted as (
+
+  
+  create or replace view FAWDBTCORE.stg_mobile_events as
+    with mobile_events_extracted as (
 
  SELECT
   event_id,
@@ -19,3 +22,4 @@ mobile_events_cleaned as (
 )
 
 select * from mobile_events_cleaned
+
