@@ -1,0 +1,22 @@
+oracle_dbt:
+  outputs:
+    dev:
+      type: oracle
+      user: "{{ env_var('DBT_ORACLE_USER') }}"
+      pass: "{{ env_var('DBT_ORACLE_PASSWORD') }}"
+      database: "{{ env_var('DBT_ORACLE_DATABASE') }}"
+      tns_name: "{{ env_var('DBT_ORACLE_TNS_NAME') }}"
+      schema: "{{ env_var('DBT_ORACLE_SCHEMA') }}"
+      threads: 4
+  verify_ssl: false
+  target: dev
+dbt_test:
+  outputs:
+    dev:
+      connection_string: '{{ env_var(''DBT_ORACLE_CONNECT_STRING'') }}'
+      database: '{{ env_var(''DBT_ORACLE_DATABASE'') }}'
+      pass: '{{ env_var(''DBT_ORACLE_PASSWORD'') }}'
+      schema: '{{ env_var(''DBT_ORACLE_SCHEMA'') }}'
+      type: oracle
+      user: '{{ env_var(''DBT_ORACLE_USER'') }}'
+  target: '{{ env_var(''DBT_TARGET'', ''dev'') }}'
