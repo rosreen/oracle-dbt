@@ -2,3 +2,5 @@ name: 'oracle_dbt'
 profile: 'oracle_dbt'
 config-version: 2
 version: '1.0.0'
+
+seed-paths: ["seeds"]
