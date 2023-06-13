@@ -1,3 +1,4 @@
+
 with start_web_events_cleaned as (
 
     select * from {{ ref('stg_web_events') }}

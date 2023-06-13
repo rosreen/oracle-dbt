@@ -1,25 +1,30 @@
 
+      merge  into FAWDBTCORE.stg_mobile_events DBT_INTERNAL_DEST
+          using o$pt_stg_mobile_events165339158258 DBT_INTERNAL_SOURCE
+          on (
+            DBT_INTERNAL_SOURCE.EVENT_ID = DBT_INTERNAL_DEST.EVENT_ID
+        )
+        when matched then
+          update set
+          DBT_INTERNAL_DEST.EVENT_TYPE = DBT_INTERNAL_SOURCE.EVENT_TYPE, 
+          DBT_INTERNAL_DEST.EVENT_TIMESTAMP = DBT_INTERNAL_SOURCE.EVENT_TIMESTAMP, 
+          DBT_INTERNAL_DEST.USER_ID = DBT_INTERNAL_SOURCE.USER_ID, 
+          DBT_INTERNAL_DEST.APP_NAME = DBT_INTERNAL_SOURCE.APP_NAME, 
+          DBT_INTERNAL_DEST.OPERATING_SYSTEM = DBT_INTERNAL_SOURCE.OPERATING_SYSTEM, 
+          DBT_INTERNAL_DEST.COUNTRY = DBT_INTERNAL_SOURCE.COUNTRY, 
+          DBT_INTERNAL_DEST.DURATION_SECONDS = DBT_INTERNAL_SOURCE.DURATION_SECONDS, 
+          DBT_INTERNAL_DEST.CONVERSION_STATUS = DBT_INTERNAL_SOURCE.CONVERSION_STATUS
+          when not matched then
+          insert(EVENT_ID, EVENT_TYPE, EVENT_TIMESTAMP, USER_ID, APP_NAME, OPERATING_SYSTEM, COUNTRY, DURATION_SECONDS, CONVERSION_STATUS)
+          values(
+            DBT_INTERNAL_SOURCE.EVENT_ID, 
+            DBT_INTERNAL_SOURCE.EVENT_TYPE, 
+            DBT_INTERNAL_SOURCE.EVENT_TIMESTAMP, 
+            DBT_INTERNAL_SOURCE.USER_ID, 
+            DBT_INTERNAL_SOURCE.APP_NAME, 
+            DBT_INTERNAL_SOURCE.OPERATING_SYSTEM, 
+            DBT_INTERNAL_SOURCE.COUNTRY, 
+            DBT_INTERNAL_SOURCE.DURATION_SECONDS, 
+            DBT_INTERNAL_SOURCE.CONVERSION_STATUS
+            )
   
-  create or replace view FAWDBTCORE.stg_mobile_events as
-    with mobile_events_extracted as (
-
- SELECT
-  event_id,
-  event_type,
-  event_timestamp,
-  user_id,
-  app_name,
-  operating_system,
-  country,
-  duration_seconds,
-  conversion_status
-FROM mobile_events
-),
-
-mobile_events_cleaned as (
-    SELECT DISTINCT *
-    FROM mobile_events_extracted
-)
-
-select * from mobile_events_cleaned
-

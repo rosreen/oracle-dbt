@@ -1,3 +1,11 @@
+
+{{
+    config(
+        materialized='incremental',
+        unique_key='event_id'
+
+        )
+}}
 with start_web_events_cleaned as (
 
     select * from {{ ref('stg_web_events') }}
@@ -37,9 +45,17 @@ JOIN start_mobile_events_cleaned m ON w.event_id = m.event_id
 mobile_event_durations as (
 SELECT
   operating_system,
+  web_event_timestamp,
   AVG(mobile_duration_seconds) AS avg_duration
 FROM combined_events
-GROUP BY operating_system
+GROUP BY operating_system, web_event_timestamp
 )
 
 select * from mobile_event_durations
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+where web_event_timestamp >= (select max(web_event_timestamp) from {{ this }})
+
+{% endif %}

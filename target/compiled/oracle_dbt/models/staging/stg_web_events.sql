@@ -26,7 +26,6 @@ select * from web_events_cleaned
 
 
 
-
   -- this filter will only be applied on an incremental run
 where event_timestamp >= (select max(event_timestamp) from FAWDBTCORE.stg_web_events)
 

@@ -1,3 +1,12 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='event_id'
+
+        )
+}}
+
+
 with mobile_events_extracted as (
 
  SELECT
@@ -19,3 +28,12 @@ mobile_events_cleaned as (
 )
 
 select * from mobile_events_cleaned
+
+
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+where event_timestamp >= (select max(event_timestamp) from {{ this }})
+
+{% endif %}

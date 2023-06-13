@@ -1,3 +1,6 @@
+
+
+
 with mobile_events_extracted as (
 
  SELECT
@@ -19,3 +22,11 @@ mobile_events_cleaned as (
 )
 
 select * from mobile_events_cleaned
+
+
+
+
+
+  -- this filter will only be applied on an incremental run
+where event_timestamp >= (select max(event_timestamp) from FAWDBTCORE.stg_mobile_events)
+

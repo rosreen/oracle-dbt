@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='event_id'
+
+        )
+}}
+
 with start_ranked_web_events as (
 
     select * from {{ ref('stg_web_events') }}
@@ -23,3 +31,11 @@ FROM start_ranked_web_events
 )
 
 select * from ranked_web_events
+
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+where event_timestamp >= (select max(event_timestamp) from {{ this }})
+
+{% endif %}

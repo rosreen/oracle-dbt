@@ -9,3 +9,4 @@ users_cleaned as (
 )
 
 select * from users_cleaned
+

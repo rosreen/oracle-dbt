@@ -1,4 +1,12 @@
 
+{{
+    config(
+        materialized='incremental',
+        unique_key='event_id'
+
+        )
+}}
+
 with start_web_events_cleaned as (
 
     select * from {{ ref('stg_web_events') }}
@@ -102,9 +110,17 @@ average_duration_by_platform_country as (
 SELECT
   platform,
   country,
+  event_timestamp,
   AVG(CASE WHEN platform = 'Web' THEN web_duration_seconds ELSE mobile_duration_seconds END) AS avg_duration
 FROM combined_categorized_events
-GROUP BY platform, country
+GROUP BY platform, country, event_timestamp
 )
 
 select * from average_duration_by_platform_country
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+where event_timestamp >= (select max(event_timestamp) from {{ this }})
+
+{% endif %}

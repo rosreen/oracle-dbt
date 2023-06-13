@@ -1,49 +1,19 @@
 
+      merge  into FAWDBTCORE.web_events_counts DBT_INTERNAL_DEST
+          using o$pt_web_events_counts165353063303 DBT_INTERNAL_SOURCE
+          on (
+            DBT_INTERNAL_SOURCE.EVENT_ID = DBT_INTERNAL_DEST.EVENT_ID
+        )
+        when matched then
+          update set
+          DBT_INTERNAL_DEST.WEB_EVENT_TYPE = DBT_INTERNAL_SOURCE.WEB_EVENT_TYPE, 
+          DBT_INTERNAL_DEST.WEB_EVENT_TIMESTAMP = DBT_INTERNAL_SOURCE.WEB_EVENT_TIMESTAMP, 
+          DBT_INTERNAL_DEST.EVENT_COUNT = DBT_INTERNAL_SOURCE.EVENT_COUNT
+          when not matched then
+          insert(WEB_EVENT_TYPE, WEB_EVENT_TIMESTAMP, EVENT_COUNT)
+          values(
+            DBT_INTERNAL_SOURCE.WEB_EVENT_TYPE, 
+            DBT_INTERNAL_SOURCE.WEB_EVENT_TIMESTAMP, 
+            DBT_INTERNAL_SOURCE.EVENT_COUNT
+            )
   
-  create or replace view FAWDBTCORE.web_events_counts as
-    with start_web_events_cleaned as (
-
-    select * from FAWDBTCORE.stg_web_events
-),
-
-start_mobile_events_cleaned as (
-
-    select * from FAWDBTCORE.stg_mobile_events
-),
-
-combined_events as (
-    
-SELECT
-  w.event_id,
-  w.event_type AS web_event_type,
-  w.event_timestamp AS web_event_timestamp,
-  w.user_id AS web_user_id,
-  w.page_url,
-  w.browser,
-  w.device_type AS web_device_type,
-  w.country AS web_country,
-  w.duration_seconds AS web_duration_seconds,
-  w.conversion_status AS web_conversion_status,
-  m.event_type AS mobile_event_type,
-  m.event_timestamp AS mobile_event_timestamp,
-  m.user_id AS mobile_user_id,
-  m.app_name,
-  m.operating_system,
-  m.country AS mobile_country,
-  m.duration_seconds AS mobile_duration_seconds,
-  m.conversion_status AS mobile_conversion_status
-FROM start_web_events_cleaned w
-JOIN start_mobile_events_cleaned m ON w.event_id = m.event_id
-
-),
-
-web_event_counts as (
-    SELECT
-  web_event_type,
-  COUNT(*) AS event_count
-FROM combined_events
-GROUP BY web_event_type
-)
-
-select * from web_event_counts
-

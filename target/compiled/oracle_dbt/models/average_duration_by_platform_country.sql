@@ -1,3 +1,5 @@
+
+
 with start_web_events_cleaned as (
 
     select * from FAWDBTCORE.stg_web_events
@@ -101,9 +103,16 @@ average_duration_by_platform_country as (
 SELECT
   platform,
   country,
+  event_timestamp,
   AVG(CASE WHEN platform = 'Web' THEN web_duration_seconds ELSE mobile_duration_seconds END) AS avg_duration
 FROM combined_categorized_events
-GROUP BY platform, country
+GROUP BY platform, country, event_timestamp
 )
 
 select * from average_duration_by_platform_country
+
+
+
+  -- this filter will only be applied on an incremental run
+where event_timestamp >= (select max(event_timestamp) from FAWDBTCORE.average_duration_by_platform_country)
+

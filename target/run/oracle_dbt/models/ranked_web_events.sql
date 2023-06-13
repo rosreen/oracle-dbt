@@ -1,29 +1,34 @@
 
+      merge  into FAWDBTCORE.ranked_web_events DBT_INTERNAL_DEST
+          using o$pt_ranked_web_events165344947083 DBT_INTERNAL_SOURCE
+          on (
+            DBT_INTERNAL_SOURCE.EVENT_ID = DBT_INTERNAL_DEST.EVENT_ID
+        )
+        when matched then
+          update set
+          DBT_INTERNAL_DEST.EVENT_TYPE = DBT_INTERNAL_SOURCE.EVENT_TYPE, 
+          DBT_INTERNAL_DEST.EVENT_TIMESTAMP = DBT_INTERNAL_SOURCE.EVENT_TIMESTAMP, 
+          DBT_INTERNAL_DEST.USER_ID = DBT_INTERNAL_SOURCE.USER_ID, 
+          DBT_INTERNAL_DEST.PAGE_URL = DBT_INTERNAL_SOURCE.PAGE_URL, 
+          DBT_INTERNAL_DEST.BROWSER = DBT_INTERNAL_SOURCE.BROWSER, 
+          DBT_INTERNAL_DEST.DEVICE_TYPE = DBT_INTERNAL_SOURCE.DEVICE_TYPE, 
+          DBT_INTERNAL_DEST.COUNTRY = DBT_INTERNAL_SOURCE.COUNTRY, 
+          DBT_INTERNAL_DEST.DURATION_SECONDS = DBT_INTERNAL_SOURCE.DURATION_SECONDS, 
+          DBT_INTERNAL_DEST.CONVERSION_STATUS = DBT_INTERNAL_SOURCE.CONVERSION_STATUS, 
+          DBT_INTERNAL_DEST.DURATION_RANK = DBT_INTERNAL_SOURCE.DURATION_RANK
+          when not matched then
+          insert(EVENT_ID, EVENT_TYPE, EVENT_TIMESTAMP, USER_ID, PAGE_URL, BROWSER, DEVICE_TYPE, COUNTRY, DURATION_SECONDS, CONVERSION_STATUS, DURATION_RANK)
+          values(
+            DBT_INTERNAL_SOURCE.EVENT_ID, 
+            DBT_INTERNAL_SOURCE.EVENT_TYPE, 
+            DBT_INTERNAL_SOURCE.EVENT_TIMESTAMP, 
+            DBT_INTERNAL_SOURCE.USER_ID, 
+            DBT_INTERNAL_SOURCE.PAGE_URL, 
+            DBT_INTERNAL_SOURCE.BROWSER, 
+            DBT_INTERNAL_SOURCE.DEVICE_TYPE, 
+            DBT_INTERNAL_SOURCE.COUNTRY, 
+            DBT_INTERNAL_SOURCE.DURATION_SECONDS, 
+            DBT_INTERNAL_SOURCE.CONVERSION_STATUS, 
+            DBT_INTERNAL_SOURCE.DURATION_RANK
+            )
   
-  create or replace view FAWDBTCORE.ranked_web_events as
-    with start_ranked_web_events as (
-
-    select * from FAWDBTCORE.stg_web_events
-
-),
-
-ranked_web_events as (
-
-SELECT
-  event_id,
-  event_type,
-  event_timestamp,
-  user_id,
-  page_url,
-  browser,
-  device_type,
-  country,
-  duration_seconds,
-  conversion_status,
-  RANK() OVER (PARTITION BY device_type ORDER BY duration_seconds DESC) AS duration_rank
-FROM start_ranked_web_events
-
-)
-
-select * from ranked_web_events
-

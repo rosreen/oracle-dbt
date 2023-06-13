@@ -1,7 +1,8 @@
 {{
     config(
-        materialized='incremental'
-        
+        materialized='incremental',
+        unique_key='event_id'
+
         )
 }}
 
@@ -30,7 +31,6 @@ web_events_cleaned as (
 select * from web_events_cleaned
 
 {% if is_incremental() %}
-{{ log("This is an incremental run", info=True) }}
 
   -- this filter will only be applied on an incremental run
 where event_timestamp >= (select max(event_timestamp) from {{ this }})

@@ -1,6 +1,6 @@
 
       merge  into FAWDBTCORE.stg_test DBT_INTERNAL_DEST
-          using o$pt_stg_test143240829837 DBT_INTERNAL_SOURCE
+          using o$pt_stg_test165339175958 DBT_INTERNAL_SOURCE
           on (
             DBT_INTERNAL_SOURCE.EVENT_ID = DBT_INTERNAL_DEST.EVENT_ID
         )

@@ -1,3 +1,5 @@
+
+
 with start_ranked_web_events as (
 
     select * from FAWDBTCORE.stg_web_events
@@ -23,3 +25,10 @@ FROM start_ranked_web_events
 )
 
 select * from ranked_web_events
+
+
+
+
+  -- this filter will only be applied on an incremental run
+where event_timestamp >= (select max(event_timestamp) from FAWDBTCORE.ranked_web_events)
+
