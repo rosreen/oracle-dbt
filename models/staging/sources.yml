@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: FAWDBTCORE
+    config:
+      materialized: incremental
+      
+    tables:
+      - name: web_events
+      - name: mobile_events
+      - name: web_events_test
+      
+

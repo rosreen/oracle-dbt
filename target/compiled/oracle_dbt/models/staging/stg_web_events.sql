@@ -1,3 +1,6 @@
+
+
+
 with web_events_extracted as (
 
     SELECT
@@ -11,7 +14,7 @@ with web_events_extracted as (
   country,
   duration_seconds,
   conversion_status
-    FROM web_events
+    FROM FAWDBTCORE.web_events
 ),
 
 web_events_cleaned as (
@@ -20,3 +23,10 @@ web_events_cleaned as (
 )
 
 select * from web_events_cleaned
+
+
+
+
+  -- this filter will only be applied on an incremental run
+where event_timestamp >= (select max(event_timestamp) from FAWDBTCORE.stg_web_events)
+

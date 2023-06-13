@@ -1,26 +1,7 @@
 
+      insert  into  FAWDBTCORE.stg_web_events (EVENT_ID, EVENT_TYPE, EVENT_TIMESTAMP, USER_ID, PAGE_URL, BROWSER, DEVICE_TYPE, COUNTRY, DURATION_SECONDS, CONVERSION_STATUS)
+    (
+       select EVENT_ID, EVENT_TYPE, EVENT_TIMESTAMP, USER_ID, PAGE_URL, BROWSER, DEVICE_TYPE, COUNTRY, DURATION_SECONDS, CONVERSION_STATUS
+       from o$pt_stg_web_events141745088854
+    )
   
-  create or replace view FAWDBTCORE.stg_web_events as
-    with web_events_extracted as (
-
-    SELECT
-  event_id,
-  event_type,
-  event_timestamp,
-  user_id,
-  page_url,
-  browser,
-  device_type,
-  country,
-  duration_seconds,
-  conversion_status
-    FROM web_events
-),
-
-web_events_cleaned as (
-    SELECT DISTINCT *
-    FROM web_events_extracted
-)
-
-select * from web_events_cleaned
-

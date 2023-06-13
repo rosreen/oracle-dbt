@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized='incremental'
+        
+        )
+}}
+
+
 with web_events_extracted as (
 
     SELECT
@@ -11,7 +19,7 @@ with web_events_extracted as (
   country,
   duration_seconds,
   conversion_status
-    FROM web_events
+    FROM {{ source('FAWDBTCORE', 'web_events') }}
 ),
 
 web_events_cleaned as (
@@ -20,3 +28,11 @@ web_events_cleaned as (
 )
 
 select * from web_events_cleaned
+
+{% if is_incremental() %}
+{{ log("This is an incremental run", info=True) }}
+
+  -- this filter will only be applied on an incremental run
+where event_timestamp >= (select max(event_timestamp) from {{ this }})
+
+{% endif %}

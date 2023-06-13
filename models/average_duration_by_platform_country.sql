@@ -26,7 +26,7 @@ SELECT
     WHEN duration_seconds < 300 THEN 'Medium'
     ELSE 'Long'
   END AS duration_category
-FROM web_events_cleaned
+FROM start_web_events_cleaned
 
 
 ),
@@ -46,7 +46,7 @@ SELECT
     WHEN conversion_status = 'Completed' THEN 'Successful'
     ELSE 'Unsuccessful'
   END AS conversion_category
-FROM mobile_events_cleaned
+FROM start_mobile_events_cleaned
 ),
 
 
