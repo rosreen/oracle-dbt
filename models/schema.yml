@@ -1,0 +1,156 @@
+
+version: 2
+
+models:
+  - name: average_duration_by_platform_country
+    columns:
+      - name: platform
+        tests:
+          - accepted_values:
+                values: ['Web', 'Mobile']
+          - not_null
+          - unique 
+         
+      - name: country
+        tests:
+          - accepted_values:
+                values: ['USA', 'UK', 'Germany', 'Canada', 'Mexico', 'China']
+          - not_null
+  
+      - name: avg_duration
+        tests:
+          - not_null
+
+  - name: event_counts_by_platform
+    columns:
+      - name: platform
+        tests:
+          - accepted_values:
+                values: ['Web', 'Mobile']
+          - not_null
+          - unique
+        
+      - name: event_count
+        tests:
+          - not_null
+ 
+  - name: mobile_event_durations
+    columns:
+      - name: operating_system
+        tests:
+          - accepted_values:
+                values: ['iOS', 'Windows', 'Android', 'Linux']
+          - not_null
+          - unique
+         
+      
+      - name: avg_duration
+        tests:
+          - not_null
+  
+  - name: mobile_users_names
+    columns:
+      - name: name
+        tests:
+          - not_null
+        
+      - name: user_id
+        tests:
+          - not_null
+          - unique
+
+  - name: web_events_counts
+    columns:
+        - name: web_event_type
+          tests:
+          - accepted_values:
+              values: ['Click', 'Page View', 'Page Forward', 'Page Backward', 'Scroll']
+          - not_null
+          - unique 
+      
+        - name: event_count
+          tests:
+            - not_null
+  
+  - name: web_users_names
+    columns:
+        - name: name
+          tests:
+          - not_null
+            
+        - name: user_id
+          tests:
+              - not_null
+              - unique
+
+  - name: web_users_emails
+    columns:
+        - name: email_address
+          tests:
+          - not_null
+            
+        - name: user_id
+          tests:
+              - not_null
+              - unique
+  
+  - name: mobile_users_emails
+    columns:
+        - name: email_address
+          tests:
+          - not_null
+            
+        - name: user_id
+          tests:
+              - not_null
+              - unique
+  
+  - name: ranked_web_events
+    columns:
+      - name: event_id
+        tests:
+          - not_null
+        
+      - name: event_type
+        tests:
+          - accepted_values:
+                values: ['Click', 'Page View', 'Page Forward', 'Page Backward', 'Scroll']
+          - not_null
+
+      - name: event_timestamp
+        tests:
+          - not_null
+      
+      - name: user_id
+        tests:
+          - not_null
+      
+      - name: page_url
+        tests:
+          - not_null
+      
+      - name: browser
+        tests:
+          - accepted_values:
+              values: ['Firefox', 'Chrome', 'Safari', 'Edge']
+          - not_null
+      
+      - name: device_type
+        tests:
+          - accepted_values:
+                values: ['Web', 'Mobile', 'Desktop']
+          - not_null
+
+      - name: country
+        tests:
+          - accepted_values:
+                values: ['USA', 'UK', 'Germany', 'Canada', 'Mexico', 'China']
+          - not_null
+      
+      - name: duration_seconds
+        tests:
+          - not_null
+      
+      - name: duration_rank
+        tests:
+          - not_null

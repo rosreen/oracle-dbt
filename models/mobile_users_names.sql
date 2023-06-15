@@ -21,7 +21,7 @@ start_users_cleaned as (
 ),
 
 mobile_users_names as (
-    select start_users_cleaned.name, start_mobile_events_cleaned.event_timestamp
+    select start_users_cleaned.name, start_mobile_events_cleaned.user_id, start_mobile_events_cleaned.event_timestamp
     from start_users_cleaned
     join start_mobile_events_cleaned on start_mobile_events_cleaned.user_id = start_users_cleaned.user_id
 )
