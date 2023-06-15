@@ -1,3 +1,9 @@
+{{
+    config(
+        materialized='incremental'
+        )
+}}
+
 with start_web_events_cleaned as (
 
     select * from {{ ref('stg_web_events') }}
@@ -100,10 +106,17 @@ event_counts_by_platform as (
 
     SELECT
   platform,
-
+  event_timestamp,
   COUNT(*) AS event_count
 FROM combined_categorized_events
-GROUP BY platform
+GROUP BY platform, event_timestamp
 )
 
 select * from event_counts_by_platform
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+where event_timestamp >= (select max(event_timestamp) from {{ this }})
+
+{% endif %}

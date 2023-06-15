@@ -1,10 +1,8 @@
 
 {{
     config(
-        materialized='incremental',
-        unique_key='event_id'
-
-        )
+        materialized='incremental'  
+              )
 }}
 
 with start_web_events_cleaned as (
@@ -111,9 +109,10 @@ SELECT
   platform,
   country,
   event_timestamp,
+  event_id,
   AVG(CASE WHEN platform = 'Web' THEN web_duration_seconds ELSE mobile_duration_seconds END) AS avg_duration
 FROM combined_categorized_events
-GROUP BY platform, country, event_timestamp
+GROUP BY platform, country, event_timestamp, event_id
 )
 
 select * from average_duration_by_platform_country

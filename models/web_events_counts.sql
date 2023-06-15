@@ -1,8 +1,6 @@
 {{
     config(
-        materialized='incremental',
-        unique_key='event_id'
-
+        materialized='incremental'
         )
 }}
 with start_web_events_cleaned as (

@@ -1,19 +1,7 @@
 
-      merge  into FAWDBTCORE.mobile_event_durations DBT_INTERNAL_DEST
-          using o$pt_mobile_event_durations165346461906 DBT_INTERNAL_SOURCE
-          on (
-            DBT_INTERNAL_SOURCE.EVENT_ID = DBT_INTERNAL_DEST.EVENT_ID
-        )
-        when matched then
-          update set
-          DBT_INTERNAL_DEST.OPERATING_SYSTEM = DBT_INTERNAL_SOURCE.OPERATING_SYSTEM, 
-          DBT_INTERNAL_DEST.WEB_EVENT_TIMESTAMP = DBT_INTERNAL_SOURCE.WEB_EVENT_TIMESTAMP, 
-          DBT_INTERNAL_DEST.AVG_DURATION = DBT_INTERNAL_SOURCE.AVG_DURATION
-          when not matched then
-          insert(OPERATING_SYSTEM, WEB_EVENT_TIMESTAMP, AVG_DURATION)
-          values(
-            DBT_INTERNAL_SOURCE.OPERATING_SYSTEM, 
-            DBT_INTERNAL_SOURCE.WEB_EVENT_TIMESTAMP, 
-            DBT_INTERNAL_SOURCE.AVG_DURATION
-            )
+      insert  into  FAWDBTCORE.mobile_event_durations (OPERATING_SYSTEM, WEB_EVENT_TIMESTAMP, AVG_DURATION)
+    (
+       select OPERATING_SYSTEM, WEB_EVENT_TIMESTAMP, AVG_DURATION
+       from o$pt_mobile_event_durations120248430849
+    )
   

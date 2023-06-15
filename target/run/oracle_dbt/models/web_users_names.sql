@@ -1,26 +1,7 @@
 
+      insert  into  FAWDBTCORE.web_users_names (NAME, EVENT_TIMESTAMP)
+    (
+       select NAME, EVENT_TIMESTAMP
+       from o$pt_web_users_names120313799910
+    )
   
-  create or replace view FAWDBTCORE.web_users_names as
-    with start_web_events_cleaned as (
-
-    select * from FAWDBTCORE.stg_web_events
-),
-
-start_mobile_events_cleaned as (
-
-    select * from FAWDBTCORE.stg_mobile_events
-), 
-
-start_users_cleaned as (
-
-    select * from FAWDBTCORE.stg_users
-),
-
-web_users_names as (
-    select start_users_cleaned.name
-    from start_users_cleaned
-    join start_web_events_cleaned on start_web_events_cleaned.user_id = start_users_cleaned.user_id
-)
-
-select * from web_users_names
-
