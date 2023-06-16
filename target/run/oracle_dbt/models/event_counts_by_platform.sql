@@ -1,7 +1,20 @@
 
-      insert  into  FAWDBTCORE.event_counts_by_platform (PLATFORM, EVENT_TIMESTAMP, EVENT_COUNT)
-    (
-       select PLATFORM, EVENT_TIMESTAMP, EVENT_COUNT
-       from o$pt_event_counts_by_platform123821288305
-    )
   
+  create or replace view FAWDBTCORE.event_counts_by_platform as
+    with events as (
+
+    select * from FAWDBTCORE.combined_categorized_events
+),
+
+
+event_counts_by_platform as (
+
+    SELECT
+  platform,
+  COUNT(*) AS event_count
+FROM events
+GROUP BY platform
+)
+
+select * from event_counts_by_platform
+

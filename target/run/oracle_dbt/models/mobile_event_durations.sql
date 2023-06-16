@@ -1,7 +1,49 @@
 
-      insert  into  FAWDBTCORE.mobile_event_durations (OPERATING_SYSTEM, WEB_EVENT_TIMESTAMP, AVG_DURATION)
-    (
-       select OPERATING_SYSTEM, WEB_EVENT_TIMESTAMP, AVG_DURATION
-       from o$pt_mobile_event_durations123821285678
-    )
   
+  create or replace view FAWDBTCORE.mobile_event_durations as
+    with start_web_events_cleaned as (
+
+    select * from FAWDBTCORE.stg_web_events
+),
+
+start_mobile_events_cleaned as (
+
+    select * from FAWDBTCORE.stg_mobile_events
+),
+
+combined_events as (
+    
+SELECT
+  w.event_id,
+  w.event_type AS web_event_type,
+  w.event_timestamp AS web_event_timestamp,
+  w.user_id AS web_user_id,
+  w.page_url,
+  w.browser,
+  w.device_type AS web_device_type,
+  w.country AS web_country,
+  w.duration_seconds AS web_duration_seconds,
+  w.conversion_status AS web_conversion_status,
+  m.event_type AS mobile_event_type,
+  m.event_timestamp AS mobile_event_timestamp,
+  m.user_id AS mobile_user_id,
+  m.app_name,
+  m.operating_system,
+  m.country AS mobile_country,
+  m.duration_seconds AS mobile_duration_seconds,
+  m.conversion_status AS mobile_conversion_status
+FROM start_web_events_cleaned w
+JOIN start_mobile_events_cleaned m ON w.event_id = m.event_id
+
+),
+
+mobile_event_durations as (
+SELECT
+  operating_system,
+  AVG(mobile_duration_seconds) AS avg_duration
+FROM combined_events
+GROUP BY operating_system
+)
+
+select * from mobile_event_durations
+

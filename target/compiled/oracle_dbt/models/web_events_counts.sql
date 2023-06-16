@@ -1,4 +1,3 @@
-
 with start_web_events_cleaned as (
 
     select * from FAWDBTCORE.stg_web_events
@@ -35,19 +34,12 @@ JOIN start_mobile_events_cleaned m ON w.event_id = m.event_id
 
 ),
 
-web_event_counts as (
+web_events_counts as (
     SELECT
   web_event_type,
-  web_event_timestamp,
   COUNT(*) AS event_count
 FROM combined_events
-GROUP BY web_event_type, web_event_timestamp
+GROUP BY web_event_type
 )
 
-select * from web_event_counts
-
-
-
-  -- this filter will only be applied on an incremental run
-where web_event_timestamp >= (select max(web_event_timestamp) from FAWDBTCORE.web_events_counts)
-
+select * from web_events_counts

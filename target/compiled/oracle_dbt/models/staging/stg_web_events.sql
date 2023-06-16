@@ -13,7 +13,8 @@ with web_events_extracted as (
   device_type,
   country,
   duration_seconds,
-  conversion_status
+  conversion_status,
+  created_at
     FROM FAWDBTCORE.web_events
 ),
 
@@ -27,5 +28,5 @@ select * from web_events_cleaned
 
 
   -- this filter will only be applied on an incremental run
-where event_timestamp >= (select max(event_timestamp) from FAWDBTCORE.stg_web_events)
+where created_at >= (select max(created_at) from FAWDBTCORE.stg_web_events)
 

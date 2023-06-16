@@ -8,6 +8,5 @@ sources:
     tables:
       - name: web_events
       - name: mobile_events
-      - name: web_events_test
       
 

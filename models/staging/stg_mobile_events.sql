@@ -18,8 +18,9 @@ with mobile_events_extracted as (
   operating_system,
   country,
   duration_seconds,
-  conversion_status
-FROM mobile_events
+  conversion_status,
+  created_at
+FROM {{ source('FAWDBTCORE', 'mobile_events') }}
 ),
 
 mobile_events_cleaned as (
@@ -34,6 +35,6 @@ select * from mobile_events_cleaned
 {% if is_incremental() %}
 
   -- this filter will only be applied on an incremental run
-where event_timestamp >= (select max(event_timestamp) from {{ this }})
+where created_at >= (select max(created_at) from {{ this }})
 
 {% endif %}
