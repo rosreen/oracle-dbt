@@ -7,6 +7,7 @@ oracle_dbt:
       #database: "{{ env_var('DBT_ORACLE_DATABASE') }}"
       tns_name: "{{ env_var('DBT_ORACLE_TNS_NAME') }}"
       schema: "{{ env_var('DBT_ORACLE_SCHEMA') }}"
+      oml_auth_token_uri: "{{ env_var('DBT_ORACLE_OML_AUTH_TOKEN_API')}}"
       threads: 4
   verify_ssl: false
   target: dev
