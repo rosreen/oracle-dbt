@@ -9,5 +9,6 @@ sources:
       - name: web_events
       - name: mobile_events
       - name: raw_users
+      - name: web_order_info
       
 
