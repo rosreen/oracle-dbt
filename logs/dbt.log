@@ -26238,3 +26238,270 @@ DECLARE
 [0m11:31:26.244368 [debug] [MainThread]: Command `dbt run` succeeded at 11:31:26.244294 after 42.68 seconds
 [0m11:31:26.244685 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x103be6d90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107f53990>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x102d26910>]}
 [0m11:31:26.245003 [debug] [MainThread]: Flushing usage events
+[0m11:55:04.561421 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106897d50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1068a3d10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1068a3f90>]}
+
+
+============================== 11:55:04.563797 | 2c3de62c-db69-49dc-ae56-153378baf94e ==============================
+[0m11:55:04.563797 [info ] [MainThread]: Running with dbt=1.5.1
+[0m11:55:04.564116 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'True', 'fail_fast': 'False', 'log_path': '/Users/rosreen/Desktop/oracle-dbt/logs', 'version_check': 'True', 'profiles_dir': '/Users/rosreen/Desktop/oracle-dbt', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'static_parser': 'True', 'log_format': 'default', 'target_path': 'None', 'send_anonymous_usage_stats': 'True'}
+[0m11:55:04.606260 [info ] [MainThread]: oracle adapter: Running in thin mode
+[0m11:55:04.628599 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '2c3de62c-db69-49dc-ae56-153378baf94e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1068e8390>]}
+[0m11:55:04.634901 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '2c3de62c-db69-49dc-ae56-153378baf94e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1068cebd0>]}
+[0m11:55:04.667978 [debug] [MainThread]: checksum: 51f6b581eba8f8101bc020bf9faf8f96af641e2da86d581f66e2bdf0ff384b1c, vars: {}, profile: , target: , version: 1.5.1
+[0m11:55:04.698291 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m11:55:04.698614 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m11:55:04.702189 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '2c3de62c-db69-49dc-ae56-153378baf94e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10709a010>]}
+[0m11:55:04.709050 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '2c3de62c-db69-49dc-ae56-153378baf94e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106fd2ad0>]}
+[0m11:55:04.709383 [info ] [MainThread]: Found 11 models, 0 tests, 0 snapshots, 0 analyses, 351 macros, 0 operations, 1 seed file, 4 sources, 0 exposures, 0 metrics, 0 groups
+[0m11:55:04.709559 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '2c3de62c-db69-49dc-ae56-153378baf94e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106fb5190>]}
+[0m11:55:04.709916 [warn ] [MainThread]: The selection criterion '+stg_wev_order_info' does not match any nodes
+[0m11:55:04.710392 [info ] [MainThread]: 
+[0m11:55:04.710540 [warn ] [MainThread]: Nothing to do. Try checking your model configs and model specification args
+[0m11:55:04.710761 [debug] [MainThread]: Command end result
+[0m11:55:04.833719 [debug] [MainThread]: Command `dbt run` succeeded at 11:55:04.833539 after 0.29 seconds
+[0m11:55:04.834230 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x103076910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x103076510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1031dac50>]}
+[0m11:55:04.834575 [debug] [MainThread]: Flushing usage events
+[0m11:55:17.274891 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10404fd10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10405bd10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10405bf90>]}
+
+
+============================== 11:55:17.277803 | 22b3bc3d-8269-42c3-b8f3-0fc1badeaea8 ==============================
+[0m11:55:17.277803 [info ] [MainThread]: Running with dbt=1.5.1
+[0m11:55:17.278133 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/Users/rosreen/Desktop/oracle-dbt', 'version_check': 'True', 'fail_fast': 'False', 'log_path': '/Users/rosreen/Desktop/oracle-dbt/logs', 'debug': 'True', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'target_path': 'None', 'send_anonymous_usage_stats': 'True'}
+[0m11:55:17.322091 [info ] [MainThread]: oracle adapter: Running in thin mode
+[0m11:55:17.343805 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '22b3bc3d-8269-42c3-b8f3-0fc1badeaea8', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104786290>]}
+[0m11:55:17.350331 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '22b3bc3d-8269-42c3-b8f3-0fc1badeaea8', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10476d5d0>]}
+[0m11:55:17.382041 [debug] [MainThread]: checksum: 51f6b581eba8f8101bc020bf9faf8f96af641e2da86d581f66e2bdf0ff384b1c, vars: {}, profile: , target: , version: 1.5.1
+[0m11:55:17.414835 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m11:55:17.415153 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m11:55:17.418742 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '22b3bc3d-8269-42c3-b8f3-0fc1badeaea8', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1046d9550>]}
+[0m11:55:17.423219 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '22b3bc3d-8269-42c3-b8f3-0fc1badeaea8', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1047ad290>]}
+[0m11:55:17.423529 [info ] [MainThread]: Found 11 models, 0 tests, 0 snapshots, 0 analyses, 351 macros, 0 operations, 1 seed file, 4 sources, 0 exposures, 0 metrics, 0 groups
+[0m11:55:17.423710 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '22b3bc3d-8269-42c3-b8f3-0fc1badeaea8', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104751a10>]}
+[0m11:55:17.424095 [warn ] [MainThread]: The selection criterion '+stg_web_order_info' does not match any nodes
+[0m11:55:17.424612 [info ] [MainThread]: 
+[0m11:55:17.424770 [warn ] [MainThread]: Nothing to do. Try checking your model configs and model specification args
+[0m11:55:17.424992 [debug] [MainThread]: Command end result
+[0m11:55:17.537078 [debug] [MainThread]: Command `dbt run` succeeded at 11:55:17.536915 after 0.28 seconds
+[0m11:55:17.537566 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10082e910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10082e510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10297a090>]}
+[0m11:55:17.537912 [debug] [MainThread]: Flushing usage events
+[0m11:55:36.981081 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104d0bf90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104d17ed0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104d17fd0>]}
+
+
+============================== 11:55:36.983433 | 05d31e99-ed6d-4764-a975-768e720d7fa0 ==============================
+[0m11:55:36.983433 [info ] [MainThread]: Running with dbt=1.5.1
+[0m11:55:36.983741 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'True', 'fail_fast': 'False', 'log_path': '/Users/rosreen/Desktop/oracle-dbt/logs', 'profiles_dir': '/Users/rosreen/Desktop/oracle-dbt', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'target_path': 'None', 'send_anonymous_usage_stats': 'True'}
+[0m11:55:37.028609 [info ] [MainThread]: oracle adapter: Running in thin mode
+[0m11:55:37.050475 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '05d31e99-ed6d-4764-a975-768e720d7fa0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104d28a10>]}
+[0m11:55:37.056841 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '05d31e99-ed6d-4764-a975-768e720d7fa0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105441990>]}
+[0m11:55:37.088958 [debug] [MainThread]: checksum: 51f6b581eba8f8101bc020bf9faf8f96af641e2da86d581f66e2bdf0ff384b1c, vars: {}, profile: , target: , version: 1.5.1
+[0m11:55:37.122581 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 1 files added, 0 files changed.
+[0m11:55:37.122999 [debug] [MainThread]: Partial parsing: added file: oracle_dbt://models/staging/stg_web_order_info.py
+[0m11:55:37.143711 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '05d31e99-ed6d-4764-a975-768e720d7fa0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10492c750>]}
+[0m11:55:37.155001 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '05d31e99-ed6d-4764-a975-768e720d7fa0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10572bed0>]}
+[0m11:55:37.155351 [info ] [MainThread]: Found 12 models, 0 tests, 0 snapshots, 0 analyses, 351 macros, 0 operations, 1 seed file, 4 sources, 0 exposures, 0 metrics, 0 groups
+[0m11:55:37.155532 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '05d31e99-ed6d-4764-a975-768e720d7fa0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105487990>]}
+[0m11:55:37.156318 [info ] [MainThread]: 
+[0m11:55:37.156701 [debug] [MainThread]: Acquiring new oracle connection 'master'
+[0m11:55:37.157250 [debug] [ThreadPool]: Acquiring new oracle connection 'list_None'
+[0m11:55:37.162190 [debug] [ThreadPool]: Using oracle connection "list_None"
+[0m11:55:37.162472 [debug] [ThreadPool]: On list_None: /* {"app": "dbt", "dbt_version": "1.5.1", "profile_name": "oracle_dbt", "target_name": "dev", "connection_name": "list_None"} */
+select username as "name"
+      from sys.all_users
+      order by username
+  
+[0m11:55:37.162650 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m11:55:37.162821 [debug] [ThreadPool]: oracle adapter: Attempting to connect using Oracle method: 'OracleConnectionMethod.TNS' and dsn: 'cfg57adw_low'
+[0m11:55:39.260904 [debug] [ThreadPool]: SQL status: OK in 2.0 seconds
+[0m11:55:39.374191 [debug] [ThreadPool]: On list_None: Close
+[0m11:55:39.484546 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_None, now list_None_FAWDBTCORE)
+[0m11:55:39.492177 [debug] [ThreadPool]: Using oracle connection "list_None_FAWDBTCORE"
+[0m11:55:39.492582 [debug] [ThreadPool]: On list_None_FAWDBTCORE: /* {"app": "dbt", "dbt_version": "1.5.1", "profile_name": "oracle_dbt", "target_name": "dev", "connection_name": "list_None_FAWDBTCORE"} */
+
+    select SYS_CONTEXT('userenv', 'DB_NAME') FROM DUAL
+  
+[0m11:55:39.492783 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m11:55:39.492989 [debug] [ThreadPool]: oracle adapter: Attempting to connect using Oracle method: 'OracleConnectionMethod.TNS' and dsn: 'cfg57adw_low'
+[0m11:55:40.875410 [debug] [ThreadPool]: SQL status: OK in 1.0 seconds
+[0m11:55:40.890897 [debug] [ThreadPool]: Using oracle connection "list_None_FAWDBTCORE"
+[0m11:55:40.891703 [debug] [ThreadPool]: On list_None_FAWDBTCORE: /* {"app": "dbt", "dbt_version": "1.5.1", "profile_name": "oracle_dbt", "target_name": "dev", "connection_name": "list_None_FAWDBTCORE"} */
+with tables as
+      (select SYS_CONTEXT('userenv', 'DB_NAME') table_catalog,
+         owner table_schema,
+         table_name,
+         case
+           when iot_type = 'Y'
+           then 'IOT'
+           when temporary = 'Y'
+           then 'TEMP'
+           else 'BASE TABLE'
+         end table_type
+       from sys.all_tables
+       union all
+       select SYS_CONTEXT('userenv', 'DB_NAME'),
+         owner,
+         view_name,
+         'VIEW'
+       from sys.all_views
+  )
+  select table_catalog as "database_name"
+    ,table_name as "name"
+    ,table_schema as "schema_name"
+    ,case table_type
+      when 'BASE TABLE' then 'table'
+      when 'VIEW' then 'view'
+    end as "kind"
+  from tables
+  where table_type in ('BASE TABLE', 'VIEW')
+    and upper(table_schema) = upper('FAWDBTCORE')
+  
+[0m11:55:41.349015 [debug] [ThreadPool]: SQL status: OK in 0.0 seconds
+[0m11:55:41.498179 [debug] [ThreadPool]: On list_None_FAWDBTCORE: ROLLBACK
+[0m11:55:41.710197 [debug] [ThreadPool]: On list_None_FAWDBTCORE: Close
+[0m11:55:41.871081 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '05d31e99-ed6d-4764-a975-768e720d7fa0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105439bd0>]}
+[0m11:55:41.871616 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m11:55:41.871916 [debug] [MainThread]: oracle adapter: Attempting to connect using Oracle method: 'OracleConnectionMethod.TNS' and dsn: 'cfg57adw_low'
+[0m11:55:43.239213 [debug] [MainThread]: On master: COMMIT
+[0m11:55:43.240363 [debug] [MainThread]: Using oracle connection "master"
+[0m11:55:43.240872 [debug] [MainThread]: On master: COMMIT
+[0m11:55:43.341671 [debug] [MainThread]: SQL status: OK in 0.0 seconds
+[0m11:55:43.343664 [debug] [MainThread]: On master: Close
+[0m11:55:43.464006 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m11:55:43.464947 [info ] [MainThread]: 
+[0m11:55:43.471040 [debug] [Thread-1 (]: Began running node model.oracle_dbt.stg_web_order_info
+[0m11:55:43.471886 [info ] [Thread-1 (]: 1 of 1 START python incremental model FAWDBTCORE.stg_web_order_info ............ [RUN]
+[0m11:55:43.472468 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_None_FAWDBTCORE, now model.oracle_dbt.stg_web_order_info)
+[0m11:55:43.472681 [debug] [Thread-1 (]: Began compiling node model.oracle_dbt.stg_web_order_info
+[0m11:55:43.485406 [debug] [Thread-1 (]: Writing injected SQL for node "model.oracle_dbt.stg_web_order_info"
+[0m11:55:43.486206 [debug] [Thread-1 (]: Timing info for model.oracle_dbt.stg_web_order_info (compile): 11:55:43.472824 => 11:55:43.486065
+[0m11:55:43.486468 [debug] [Thread-1 (]: Began executing node model.oracle_dbt.stg_web_order_info
+[0m11:55:43.512941 [info ] [Thread-1 (]: Python model materialization is incremental
+[0m11:55:43.513445 [debug] [Thread-1 (]: Writing runtime python for node "model.oracle_dbt.stg_web_order_info"
+[0m11:55:46.168656 [debug] [Thread-1 (]: Using oracle connection "model.oracle_dbt.stg_web_order_info"
+[0m11:55:46.169715 [debug] [Thread-1 (]: On model.oracle_dbt.stg_web_order_info: /* {"app": "dbt", "dbt_version": "1.5.1", "profile_name": "oracle_dbt", "target_name": "dev", "node_id": "model.oracle_dbt.stg_web_order_info"} */
+ 
+                BEGIN
+                   sys.pyqSetAuthToken('eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJGQVdEQlRDT1JFIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUE3TlRLRVRQS0lFQVBMVlpXVU5SWkdSNlNYRFc2Mk5ZTjVGUktVSjRHSFYzQlBaWUJHTDJRIiwiZGF0YWJhc2VfbmFtZSI6IkNGRzU3QURXIiwicGh5c2ljYWxfZGF0YWJhc2VfbmFtZSI6IlRWMUxHOFBEVVQ0TjhWQ19DRkc1N0FEVyIsImNsb3VkX2RhdGFiYXNlX25hbWUiOiJPQ0lEMS5BVVRPTk9NT1VTREFUQUJBU0UuT0MxLklBRC5BTlVXQ0xKVEdHVkNWUUFBTE9TTlNGQUFMRlFUMkpVSjRJQ0lMSTJGTlFXQUZaM1I1SlZUUktTRDY3M1EiLCJyb2xlcyI6Ilt7XCJyb2xlXCI6XCJPTUxfREVWRUxPUEVSXCIsXCJjb21tb25cIjpmYWxzZX1dIiwiaXNzIjoiRkUwRTk1NjcwMzk3MTExMEUwNTM5MjEzMDAwQUU2QjQiLCJleHAiOjE2ODc0NjM3NDUsImlhdCI6MTY4NzQ2MDE0NX0.okRpMJ4ePQnXcOB4sKN9MIcszoTDoi0bZdDEtdqom6vgtCem-SJEpzANRKh-zOxh8m1_vDvykwjWspifMvlq1BH1Bryqgv7IC7k7Dsxiuq_mM1mcCQtX0Mf59E_jpYO2rMvfpAfiSQsmsF07v94RPtPhxvT-uHGmXh6dZTcJEOg9z6Nduk0OGR88tdsu90dHMO0BzeD67-z5Ss65aHRSc0zK7gN0Jg_VQajlLkX0AjJNjASFd8NCmp4912Lexhx7PegIdwDRguIq1JnWB2dt3ou3kFSdEoRctJ_Pk6g4psgU2g9pZZbR-2IwTSMy3CcdqX_G_X3UMjS11pSGe5EdMA!5qrdm/3ASaE49piUv7qwXg==');
+                   sys.pyqScriptCreate('stg_web_order_info_dbt_py_script', 'def main():
+    import oml
+    import pandas as pd
+    def ref(*args, **kwargs):
+        refs = {}
+        key = ".".join(args)
+        version = kwargs.get("v") or kwargs.get("version")
+        if version:
+            key += f".v{version}"
+        schema, table = refs[key].split(".")
+        # Use oml.sync(schema=schema, table=table)
+        dbt_load_df_function = kwargs.get("dbt_load_df_function")
+        return dbt_load_df_function(schema=schema.upper(), table=table.upper())
+
+
+    def source(*args, dbt_load_df_function):
+        sources = {"FAWDBTCORE.web_order_info": "FAWDBTCORE.web_order_info"}
+        key = ".".join(args)
+        schema, table = sources[key].split(".")
+        # Use oml.sync(schema=schema, table=table)
+        return dbt_load_df_function(schema=schema.upper(), table=table.upper())
+
+
+    config_dict = {}
+
+
+    class config:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        @staticmethod
+        def get(key, default=None):
+            return config_dict.get(key, default)
+
+    class this:
+        """dbt.this() or dbt.this.identifier"""
+        database = "None"
+        schema = "FAWDBTCORE"
+        identifier = "stg_web_order_info"
+        def __repr__(self):
+            return "FAWDBTCORE.stg_web_order_info"
+
+
+    class dbtObj:
+        def __init__(self, load_df_function) -> None:
+            self.source = lambda *args: source(*args, dbt_load_df_function=load_df_function)
+            self.ref = lambda *args: ref(*args, dbt_load_df_function=load_df_function)
+            self.config = config
+            self.this = this()
+            self.is_incremental = False
+
+    def model(dbt, session):
+    
+        dbt.config(materialized="incremental")
+    
+        s_df = dbt.source("FAWDBTCORE", "web_order_info")
+    
+        df = s_df.pull()
+    
+        return df
+
+
+
+
+
+    def materialize(df, table, session):
+        if isinstance(df, pd.core.frame.DataFrame):
+           oml.create(df, table=table)
+        elif isinstance(df, oml.core.frame.DataFrame):
+           df.materialize(table=table)
+
+    dbt = dbtObj(load_df_function=oml.sync)
+    final_df = model(dbt, session=oml)
+
+    
+    
+    # incremental materialization
+    
+    table_name = dbt.this.identifier
+    
+    
+    materialize(final_df, table=table_name.upper(), session=oml)
+    return pd.DataFrame.from_dict({"result": [1]})', FALSE, TRUE);
+                   EXECUTE IMMEDIATE 'CREATE GLOBAL TEMPORARY TABLE o$pt_dbt_pyqeval_stg_web_order_info_tmp_185546 
+                                AS SELECT * FROM TABLE(pyqEval(par_lst => NULL, 
+                                                               out_fmt => ''{"result":"number"}'',
+                                                               scr_name => ''stg_web_order_info_dbt_py_script'', 
+                                                               scr_owner => NULL))';
+                   EXECUTE IMMEDIATE 'DROP TABLE o$pt_dbt_pyqeval_stg_web_order_info_tmp_185546';
+                   sys.pyqScriptDrop('stg_web_order_info_dbt_py_script');
+                END;
+        
+[0m11:55:46.170757 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m11:55:46.171118 [debug] [Thread-1 (]: oracle adapter: Attempting to connect using Oracle method: 'OracleConnectionMethod.TNS' and dsn: 'cfg57adw_low'
+[0m11:56:12.328312 [debug] [Thread-1 (]: SQL status: OK in 26.0 seconds
+[0m11:56:12.333044 [info ] [Thread-1 (]: oracle adapter: OK
+[0m11:56:12.354118 [debug] [Thread-1 (]: On model.oracle_dbt.stg_web_order_info: COMMIT
+[0m11:56:12.355139 [debug] [Thread-1 (]: Using oracle connection "model.oracle_dbt.stg_web_order_info"
+[0m11:56:12.355707 [debug] [Thread-1 (]: On model.oracle_dbt.stg_web_order_info: COMMIT
+[0m11:56:12.504294 [debug] [Thread-1 (]: SQL status: OK in 0.0 seconds
+[0m11:56:12.530217 [debug] [Thread-1 (]: Timing info for model.oracle_dbt.stg_web_order_info (execute): 11:55:43.486608 => 11:56:12.529862
+[0m11:56:12.531142 [debug] [Thread-1 (]: On model.oracle_dbt.stg_web_order_info: Close
+[0m11:56:12.678637 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '05d31e99-ed6d-4764-a975-768e720d7fa0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105854450>]}
+[0m11:56:12.681651 [info ] [Thread-1 (]: 1 of 1 OK created python incremental model FAWDBTCORE.stg_web_order_info ....... [[32mOK[0m in 29.21s]
+[0m11:56:12.683105 [debug] [Thread-1 (]: Finished running node model.oracle_dbt.stg_web_order_info
+[0m11:56:12.690844 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m11:56:12.691737 [debug] [MainThread]: oracle adapter: Attempting to connect using Oracle method: 'OracleConnectionMethod.TNS' and dsn: 'cfg57adw_low'
+[0m11:56:14.664251 [debug] [MainThread]: On master: COMMIT
+[0m11:56:14.666442 [debug] [MainThread]: Using oracle connection "master"
+[0m11:56:14.667456 [debug] [MainThread]: On master: COMMIT
+[0m11:56:14.827304 [debug] [MainThread]: SQL status: OK in 0.0 seconds
+[0m11:56:14.829742 [debug] [MainThread]: On master: Close
+[0m11:56:15.013158 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m11:56:15.014660 [debug] [MainThread]: Connection 'model.oracle_dbt.stg_web_order_info' was properly closed.
+[0m11:56:15.016218 [info ] [MainThread]: 
+[0m11:56:15.017572 [info ] [MainThread]: Finished running 1 incremental model in 0 hours 0 minutes and 37.86 seconds (37.86s).
+[0m11:56:15.020580 [debug] [MainThread]: Command end result
+[0m11:56:15.039947 [info ] [MainThread]: 
+[0m11:56:15.041089 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m11:56:15.041654 [info ] [MainThread]: 
+[0m11:56:15.042109 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
+[0m11:56:15.042965 [debug] [MainThread]: Command `dbt run` succeeded at 11:56:15.042828 after 38.08 seconds
+[0m11:56:15.043572 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x100b8e910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x100b8e510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x100cf2c50>]}
+[0m11:56:15.044402 [debug] [MainThread]: Flushing usage events
