@@ -5,10 +5,10 @@ def model(dbt, session):
 
     dbt.config(materialized="table")
 
-    s_df = dbt.source("FAWDBTCORE", "web_order_info")
+    s_df = dbt.ref( "stg_web_order_info")
     df = s_df.pull()
 
-    x = df[["PRICE"]]  
+    x = df[["ORDER_ID", "PRODUCT_ID", "PRICE" , "QUANTITY", "CUSTOMER_ID"]]  
     y = df["SHIPPING_CITY"]  
 
     label_encoder = LabelEncoder()
@@ -23,6 +23,7 @@ def model(dbt, session):
     y_pred_decoded = label_encoder.inverse_transform(y_pred)
 
     accuracy = classifier.score(X_test, y_test)
-    res_df  = pd.DataFrame(data={"Shipping_City_Prediction": y_pred_decoded, "Shipping_City_Actual": label_encoder.inverse_transform(y_test)})
+    res_df  = pd.DataFrame(data={"Shipping_City_Prediction": y_pred_decoded, "Shipping_City_actual": y_test,  "Accuracy": accuracy})
 
+    
     return res_df
