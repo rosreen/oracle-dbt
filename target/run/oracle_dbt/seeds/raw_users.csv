@@ -1,9 +1,7 @@
 
     
     
-    
-    create table FAWDBTCORE.raw_users (user_id number,name varchar2(21))
-  ;
+    truncate table FAWDBTCORE.RAW_USERS;
     -- dbt seed --
     
             insert all
