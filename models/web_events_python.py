@@ -18,12 +18,12 @@ def model(dbt, session):
     classifier = DecisionTreeClassifier()
     classifier.fit(X_train, y_train)
 
-    y_pred = classifier.predict(X_test)
+    y_pred = classifier.predict(x)
 
     y_pred_decoded = label_encoder.inverse_transform(y_pred)
 
     accuracy = classifier.score(X_test, y_test)
-    res_df  = pd.DataFrame(data={"Shipping_City_Prediction": y_pred_decoded, "Shipping_City_actual": y_test,  "Accuracy": accuracy})
-
+    #res_df  = pd.DataFrame(data={"Shipping_City_Prediction": y_pred_decoded, "Shipping_City_actual": label_encoder.inverse_transform(y_test)})
+    df["Shipping_City_Prediction"] = y_pred_decoded
     
-    return res_df
+    return df
