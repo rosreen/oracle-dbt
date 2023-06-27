@@ -1,4 +1,5 @@
 *.log
+/oracle-dbt/logs
 /oracle-dbt/target
 /oracle-dbt/dbt_packages
 /oracle-dbt/logs
