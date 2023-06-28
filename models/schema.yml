@@ -1,0 +1,72 @@
+
+version: 2
+
+models:
+  - name: average_duration_by_platform_country
+    columns:
+      - name: platform
+        tests:
+          - accepted_values:
+                values: ['Web', 'Mobile']
+          - not_null
+         
+      - name: country
+        tests:
+          - accepted_values:
+                values: ['USA', 'UK', 'Germany', 'Canada', 'Mexico', 'China', 'India']
+          - not_null
+  
+      - name: avg_duration
+        tests:
+          - not_null
+
+  - name: event_counts_by_platform
+    columns:
+      - name: platform
+        tests:
+          - accepted_values:
+                values: ['Web', 'Mobile']
+          - not_null
+          - unique
+        
+      - name: event_count
+        tests:
+          - not_null
+ 
+  - name: mobile_event_durations
+    columns:
+      - name: operating_system
+        tests:
+          - accepted_values:
+                values: ['iOS', 'Windows', 'Android', 'Linux']
+          - not_null
+          - unique
+         
+      
+      - name: avg_duration
+        tests:
+          - not_null
+  
+  - name: most_active_mobile_users
+    columns:
+      - name: name
+        tests:
+          - not_null
+        
+      - name: num_mobile_events
+        tests:
+          - not_null
+
+  - name: most_frequent_browser
+    columns:
+        - name: name
+          tests:
+          - not_null
+
+        - name: most_frequent_browser
+          tests:
+            - not_null
+  
+ 
+  
+  
