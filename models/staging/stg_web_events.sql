@@ -2,7 +2,6 @@
     config(
         materialized='incremental',
         unique_key='event_id'
-
         )
 }}
 
@@ -19,7 +18,8 @@ with web_events_extracted as (
   device_type,
   country,
   duration_seconds,
-  conversion_status
+  conversion_status,
+  created_at
     FROM {{ source('FAWDBTCORE', 'web_events') }}
 ),
 
@@ -33,6 +33,6 @@ select * from web_events_cleaned
 {% if is_incremental() %}
 
   -- this filter will only be applied on an incremental run
-where event_timestamp >= (select max(event_timestamp) from {{ this }})
+where created_at >= (select max(created_at) from {{ this }})
 
 {% endif %}

@@ -1,8 +1,3 @@
-{{
-    config(
-        materialized='incremental'
-        )
-}}
 
 
 with start_web_events_cleaned as (
@@ -21,16 +16,11 @@ start_users_cleaned as (
 ),
 
 mobile_users_names as (
-    select start_users_cleaned.name, start_mobile_events_cleaned.event_timestamp
+    select start_users_cleaned.name, count(start_mobile_events_cleaned.event_id) as num_mobile_events
     from start_users_cleaned
     join start_mobile_events_cleaned on start_mobile_events_cleaned.user_id = start_users_cleaned.user_id
+    group by start_users_cleaned.name
+    ORDER BY num_mobile_events DESC
 )
 
 select * from mobile_users_names
-
-{% if is_incremental() %}
-
-  -- this filter will only be applied on an incremental run
-where event_timestamp >= (select max(event_timestamp) from {{ this }})
-
-{% endif %}

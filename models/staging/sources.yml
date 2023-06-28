@@ -8,6 +8,7 @@ sources:
     tables:
       - name: web_events
       - name: mobile_events
-      - name: web_events_test
+      - name: raw_users
+      - name: web_order_info
       
 
