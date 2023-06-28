@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: FAWDBTCORE
+    config:
+      materialized: incremental
+      
+    tables:
+      - name: web_events
+        freshness:
+          warn_after:
+            count: 1
+            period: day
+        loaded_at_field: created_at
+      - name: mobile_events
+        freshness:
+          warn_after:
+            count: 1
+            period: day
+        loaded_at_field: created_at
+      - name: raw_users
+      - name: web_order_info
+       
