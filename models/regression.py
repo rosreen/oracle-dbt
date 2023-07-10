@@ -23,5 +23,5 @@ def model(dbt, session):
     regressor.fit(X_train, y_train)
 
     y_pred = regressor.predict(X_test)
-    result_df = pd.DataFrame({"Predicted": y_pred, "Actual": y_test})
+    result_df = pd.DataFrame({"Predicted Quantity": y_pred, "Actual Quantity": y_test})
     return result_df
