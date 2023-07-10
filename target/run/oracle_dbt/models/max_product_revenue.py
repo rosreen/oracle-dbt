@@ -43,9 +43,9 @@ def main():
         """dbt.this() or dbt.this.identifier"""
         database = "None"
         schema = "FAWDBTCORE"
-        identifier = "web_events_python"
+        identifier = "max_product_revenue"
         def __repr__(self):
-            return "FAWDBTCORE.web_events_python"
+            return "FAWDBTCORE.max_product_revenue"
 
 
     class dbtObj:
@@ -56,36 +56,19 @@ def main():
             self.this = this()
             self.is_incremental = False
 
-    from sklearn.model_selection import train_test_split
-    from sklearn.preprocessing import LabelEncoder
-    from sklearn.tree import DecisionTreeClassifier
     def model(dbt, session):
-    
         dbt.config(materialized="table")
-        dbt.config(async_flag=True)  # run the python function in async mode
-        dbt.config(timeout=1800)  # timeout of 30 minutes
-        s_df = dbt.ref( "stg_web_order_info")
-        df = s_df.pull()
+        s_df = dbt.ref("stg_web_order_info")
+        total_revenue = (s_df["PRICE"] * s_df["QUANTITY"]).sum()
+        cr = session.cursor()
+        _ = cr.execute("SELECT MAX(price) FROM stg_web_order_info")
+        max_price = cr.fetchone()[0]
     
-        x = df[["ORDER_ID", "PRODUCT_ID", "PRICE" , "QUANTITY", "CUSTOMER_ID"]]  
-        y = df["SHIPPING_CITY"]  
+        most_expensive_product_orders = s_df[s_df["PRICE"] == max_price]
+        most_expensive_product_revenue = (most_expensive_product_orders["PRICE"] * most_expensive_product_orders["QUANTITY"]).sum()
+        most_expensive_product_revenue_df = pd.DataFrame([most_expensive_product_revenue], columns=["REVENUE"])
     
-        label_encoder = LabelEncoder()
-        y_encoded = label_encoder.fit_transform(y)
-    
-        X_train, X_test, y_train, y_test = train_test_split(x, y_encoded, test_size=0.2, random_state=42)
-        classifier = DecisionTreeClassifier()
-        classifier.fit(X_train, y_train)
-    
-        y_pred = classifier.predict(x)
-    
-        y_pred_decoded = label_encoder.inverse_transform(y_pred)
-    
-        accuracy = classifier.score(X_test, y_test)
-        #res_df  = pd.DataFrame(data={"Shipping_City_Prediction": y_pred_decoded, "Shipping_City_actual": label_encoder.inverse_transform(y_test)})
-        df["Shipping_City_Prediction"] = y_pred_decoded
-        
-        return df
+        return most_expensive_product_revenue_df
 
 
 

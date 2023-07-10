@@ -9,7 +9,7 @@ def main():
     import oml
     import pandas as pd
     def ref(*args, **kwargs):
-        refs = {"stg_web_order_info": "FAWDBTCORE.stg_web_order_info"}
+        refs = {}
         key = ".".join(args)
         version = kwargs.get("v") or kwargs.get("version")
         if version:
@@ -21,7 +21,7 @@ def main():
 
 
     def source(*args, dbt_load_df_function):
-        sources = {}
+        sources = {"FAWDBTCORE.web_order_info": "FAWDBTCORE.web_order_info"}
         key = ".".join(args)
         schema, table = sources[key].split(".")
         # Use oml.sync(schema=schema, table=table)
@@ -43,9 +43,9 @@ def main():
         """dbt.this() or dbt.this.identifier"""
         database = "None"
         schema = "FAWDBTCORE"
-        identifier = "web_events_python"
+        identifier = "regression"
         def __repr__(self):
-            return "FAWDBTCORE.web_events_python"
+            return "FAWDBTCORE.regression"
 
 
     class dbtObj:
@@ -57,35 +57,31 @@ def main():
             self.is_incremental = False
 
     from sklearn.model_selection import train_test_split
+    from sklearn.linear_model import LinearRegression
     from sklearn.preprocessing import LabelEncoder
-    from sklearn.tree import DecisionTreeClassifier
-    def model(dbt, session):
     
+    def model(dbt, session):
         dbt.config(materialized="table")
-        dbt.config(async_flag=True)  # run the python function in async mode
-        dbt.config(timeout=1800)  # timeout of 30 minutes
-        s_df = dbt.ref( "stg_web_order_info")
+    
+        s_df = dbt.source("FAWDBTCORE", "web_order_info")
         df = s_df.pull()
     
-        x = df[["ORDER_ID", "PRODUCT_ID", "PRICE" , "QUANTITY", "CUSTOMER_ID"]]  
-        y = df["SHIPPING_CITY"]  
+        X = df[["PRICE", "CATEGORY", "PAYMENT_TYPE"]]
+        y = df["QUANTITY"]
     
         label_encoder = LabelEncoder()
-        y_encoded = label_encoder.fit_transform(y)
+        X_encoded = X.copy()
+        for feature in ["CATEGORY", "PAYMENT_TYPE"]:
+            X_encoded[feature] = label_encoder.fit_transform(X[feature])
     
-        X_train, X_test, y_train, y_test = train_test_split(x, y_encoded, test_size=0.2, random_state=42)
-        classifier = DecisionTreeClassifier()
-        classifier.fit(X_train, y_train)
+        X_train, X_test, y_train, y_test = train_test_split(X_encoded, y, test_size=0.2, random_state=42)
     
-        y_pred = classifier.predict(x)
+        regressor = LinearRegression()
+        regressor.fit(X_train, y_train)
     
-        y_pred_decoded = label_encoder.inverse_transform(y_pred)
-    
-        accuracy = classifier.score(X_test, y_test)
-        #res_df  = pd.DataFrame(data={"Shipping_City_Prediction": y_pred_decoded, "Shipping_City_actual": label_encoder.inverse_transform(y_test)})
-        df["Shipping_City_Prediction"] = y_pred_decoded
-        
-        return df
+        y_pred = regressor.predict(X_test)
+        result_df = pd.DataFrame({"Predicted": y_pred, "Actual": y_test})
+        return result_df
 
 
 

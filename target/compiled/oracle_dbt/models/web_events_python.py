@@ -4,7 +4,8 @@ from sklearn.tree import DecisionTreeClassifier
 def model(dbt, session):
 
     dbt.config(materialized="table")
-
+    dbt.config(async_flag=True)  # run the python function in async mode
+    dbt.config(timeout=1800)  # timeout of 30 minutes
     s_df = dbt.ref( "stg_web_order_info")
     df = s_df.pull()
 
@@ -86,7 +87,8 @@ def main():
     def model(dbt, session):
     
         dbt.config(materialized="table")
-    
+        dbt.config(async_flag=True)  # run the python function in async mode
+        dbt.config(timeout=1800)  # timeout of 30 minutes
         s_df = dbt.ref( "stg_web_order_info")
         df = s_df.pull()
     

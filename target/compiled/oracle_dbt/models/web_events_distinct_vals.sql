@@ -1,0 +1,111 @@
+with start_web_events_cleaned as (
+
+    select * from FAWDBTCORE.stg_web_events
+),
+
+web_events_distinct_vals as (
+SELECT
+    'EVENT_ID' AS COLUMN_NAME,
+    COUNT(DISTINCT EVENT_ID) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+UNION ALL
+
+SELECT
+    'EVENT_TYPE' AS COLUMN_NAME,
+    COUNT(DISTINCT EVENT_TYPE) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+UNION ALL
+
+SELECT
+    'EVENT_TIMESTAMP' AS COLUMN_NAME,
+    COUNT(DISTINCT EVENT_TIMESTAMP) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+UNION ALL
+
+SELECT
+    'USER_ID' AS COLUMN_NAME,
+    COUNT(DISTINCT USER_ID) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+UNION ALL
+
+SELECT
+    'PAGE_URL' AS COLUMN_NAME,
+    COUNT(DISTINCT PAGE_URL) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+UNION ALL
+
+SELECT
+    'BROWSER' AS COLUMN_NAME,
+    COUNT(DISTINCT BROWSER) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+UNION ALL
+
+SELECT
+    'DEVICE_TYPE' AS COLUMN_NAME,
+    COUNT(DISTINCT DEVICE_TYPE) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+UNION ALL
+
+SELECT
+    'COUNTRY' AS COLUMN_NAME,
+    COUNT(DISTINCT COUNTRY) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+UNION ALL
+
+SELECT
+    'DURATION_SECONDS' AS COLUMN_NAME,
+    COUNT(DISTINCT DURATION_SECONDS) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+UNION ALL
+
+SELECT
+    'CONVERSION_STATUS' AS COLUMN_NAME,
+    COUNT(DISTINCT CONVERSION_STATUS) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+UNION ALL
+
+SELECT
+    'CREATED_AT' AS COLUMN_NAME,
+    COUNT(DISTINCT CREATED_AT) AS DISTINCT_COUNT
+FROM
+    start_web_events_cleaned
+
+-- UNION ALL
+
+-- SELECT
+--     'SESSION_ID' AS COLUMN_NAME,
+--     COUNT(DISTINCT SESSION_ID) AS DISTINCT_COUNT
+-- FROM
+--     start_web_events_cleaned
+
+-- UNION ALL
+
+-- SELECT
+--     'PAGE_TITLE' AS COLUMN_NAME,
+--     COUNT(DISTINCT PAGE_TITLE) AS DISTINCT_COUNT
+-- FROM
+--     start_mobile_events_cleaned
+
+)
+
+select * from web_events_distinct_vals

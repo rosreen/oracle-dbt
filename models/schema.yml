@@ -1,5 +1,17 @@
 
 version: 2
+sources:
+  - name: FAWDBTCORE
+    schema: FAWDBTCORE
+    quoting:
+        database: false
+        schema: false
+        identifier: false
+    tables:
+      - name: web_events
+      - name: mobile_events
+      - name: web_order_info
+      - name: raw_users
 
 models:
   - name: average_duration_by_platform_country

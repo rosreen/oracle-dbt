@@ -13,7 +13,9 @@ with mobile_events_extracted as (
   country,
   duration_seconds,
   conversion_status,
-  created_at
+  created_at,
+  session_id,
+  screen_resolution
 FROM FAWDBTCORE.mobile_events
 ),
 

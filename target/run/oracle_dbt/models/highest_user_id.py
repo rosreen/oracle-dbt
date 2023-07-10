@@ -9,7 +9,7 @@ def main():
     import oml
     import pandas as pd
     def ref(*args, **kwargs):
-        refs = {"stg_web_order_info": "FAWDBTCORE.stg_web_order_info"}
+        refs = {}
         key = ".".join(args)
         version = kwargs.get("v") or kwargs.get("version")
         if version:
@@ -21,7 +21,7 @@ def main():
 
 
     def source(*args, dbt_load_df_function):
-        sources = {}
+        sources = {"FAWDBTCORE.raw_users": "FAWDBTCORE.raw_users"}
         key = ".".join(args)
         schema, table = sources[key].split(".")
         # Use oml.sync(schema=schema, table=table)
@@ -43,9 +43,9 @@ def main():
         """dbt.this() or dbt.this.identifier"""
         database = "None"
         schema = "FAWDBTCORE"
-        identifier = "web_events_python"
+        identifier = "highest_user_id"
         def __repr__(self):
-            return "FAWDBTCORE.web_events_python"
+            return "FAWDBTCORE.highest_user_id"
 
 
     class dbtObj:
@@ -56,36 +56,17 @@ def main():
             self.this = this()
             self.is_incremental = False
 
-    from sklearn.model_selection import train_test_split
-    from sklearn.preprocessing import LabelEncoder
-    from sklearn.tree import DecisionTreeClassifier
     def model(dbt, session):
-    
         dbt.config(materialized="table")
-        dbt.config(async_flag=True)  # run the python function in async mode
-        dbt.config(timeout=1800)  # timeout of 30 minutes
-        s_df = dbt.ref( "stg_web_order_info")
-        df = s_df.pull()
+        raw_users_df = dbt.source("FAWDBTCORE", "raw_users")     
     
-        x = df[["ORDER_ID", "PRODUCT_ID", "PRICE" , "QUANTITY", "CUSTOMER_ID"]]  
-        y = df["SHIPPING_CITY"]  
+        cr = session.cursor()
+        _ = cr.execute("SELECT MAX(user_id) FROM stg_users")
+        max_user_id = cr.fetchone()[0]
     
-        label_encoder = LabelEncoder()
-        y_encoded = label_encoder.fit_transform(y)
+        max_user_ids = raw_users_df[raw_users_df["USER_ID"] == max_user_id]
     
-        X_train, X_test, y_train, y_test = train_test_split(x, y_encoded, test_size=0.2, random_state=42)
-        classifier = DecisionTreeClassifier()
-        classifier.fit(X_train, y_train)
-    
-        y_pred = classifier.predict(x)
-    
-        y_pred_decoded = label_encoder.inverse_transform(y_pred)
-    
-        accuracy = classifier.score(X_test, y_test)
-        #res_df  = pd.DataFrame(data={"Shipping_City_Prediction": y_pred_decoded, "Shipping_City_actual": label_encoder.inverse_transform(y_test)})
-        df["Shipping_City_Prediction"] = y_pred_decoded
-        
-        return df
+        return max_user_ids
 
 
 
