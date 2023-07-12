@@ -12,6 +12,7 @@ sources:
       - name: mobile_events
       - name: web_order_info
       - name: raw_users
+      - name: invoices
 
 models:
   - name: average_duration_by_platform_country
