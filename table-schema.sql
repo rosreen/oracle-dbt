@@ -115,3 +115,86 @@ SELECT
  'Resolution ' || level AS screen_resolution
 FROM dual
 CONNECT BY level <= 10000000;
+
+
+
+
+-- Create table
+CREATE TABLE web_order_info (
+    order_id      NUMBER,
+    product       VARCHAR2(50),
+    product_id    NUMBER,
+    price         NUMBER(10,2),
+    quantity      NUMBER,
+    shipping_city VARCHAR2(50),
+    order_date    DATE,
+    customer_id   NUMBER,
+    category      VARCHAR2(50),
+    payment_type  VARCHAR2(50)
+);
+
+-- Insert data
+DECLARE
+    i NUMBER := 1;
+BEGIN
+    WHILE i <= 100000 LOOP
+        DECLARE
+            city_num NUMBER := DBMS_RANDOM.VALUE;
+            city VARCHAR2(50);
+        BEGIN
+            IF city_num <= 0.2 THEN
+                city := 'City A';
+            ELSIF city_num > 0.2 AND city_num <= 0.5 THEN
+                city := 'City B';
+            ELSIF city_num > 0.5 AND city_num <= 0.8 THEN
+                city := 'City C';
+            ELSE
+                city := 'City D';
+            END IF;
+            
+            INSERT INTO web_order_info (
+                order_id,
+                product,
+                product_id,
+                price,
+                quantity,
+                shipping_city,
+                order_date,
+                customer_id,
+                category,
+                payment_type
+            ) VALUES (
+                i,
+                'Product ' || TO_CHAR(i),
+                i,
+                CASE
+                    WHEN city = 'City A' THEN DBMS_RANDOM.VALUE(100, 500)
+                    WHEN city = 'City B' THEN DBMS_RANDOM.VALUE(200, 800)
+                    WHEN city = 'City C' THEN DBMS_RANDOM.VALUE(300, 1000)
+                    ELSE DBMS_RANDOM.VALUE(500, 1500)
+                END,
+                DBMS_RANDOM.VALUE(1, 10),
+                city,
+                TRUNC(SYSDATE) - DBMS_RANDOM.VALUE(1, 365),
+                DBMS_RANDOM.VALUE(1, 1000),
+                CASE
+                    WHEN i <= 30000 THEN 'Category 1'
+                    WHEN i > 30000 AND i <= 60000 THEN 'Category 2'
+                    ELSE 'Category 3'
+                END,
+                CASE
+                    WHEN i <= 40000 THEN 'Cash'
+                    WHEN i > 40000 AND i <= 80000 THEN 'Credit Card'
+                    ELSE 'PayPal'
+                END
+            );
+        END;
+        
+        i := i + 1;
+    END LOOP;
+    
+    COMMIT;
+END;
+
+
+
