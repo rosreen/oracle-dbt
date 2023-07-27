@@ -1,5 +1,5 @@
 
-    
+      
   
     
 
@@ -21,7 +21,7 @@ def main():
 
 
     def source(*args, dbt_load_df_function):
-        sources = {"FAWDBTCORE.web_order_info": "FAWDBTCORE.web_order_info"}
+        sources = {"FAWDBTCORE.requisitions": "FAWDBTCORE.requisitions"}
         key = ".".join(args)
         schema, table = sources[key].split(".")
         # Use oml.sync(schema=schema, table=table)
@@ -43,9 +43,9 @@ def main():
         """dbt.this() or dbt.this.identifier"""
         database = "None"
         schema = "FAWDBTCORE"
-        identifier = "regression"
+        identifier = "stg_req"
         def __repr__(self):
-            return "FAWDBTCORE.regression"
+            return "FAWDBTCORE.stg_req"
 
 
     class dbtObj:
@@ -56,32 +56,15 @@ def main():
             self.this = this()
             self.is_incremental = False
 
-    from sklearn.model_selection import train_test_split
-    from sklearn.linear_model import LinearRegression
-    from sklearn.preprocessing import LabelEncoder
-    
     def model(dbt, session):
-        dbt.config(materialized="table")
     
-        s_df = dbt.source("FAWDBTCORE", "web_order_info")
+        dbt.config(materialized="incremental")
+    
+        s_df = dbt.source("FAWDBTCORE", "requisitions")
+    
         df = s_df.pull()
     
-        X = df[["PRICE", "CATEGORY", "PAYMENT_TYPE"]]
-        y = df["QUANTITY"]
-    
-        label_encoder = LabelEncoder()
-        X_encoded = X.copy()
-        for feature in ["CATEGORY", "PAYMENT_TYPE"]:
-            X_encoded[feature] = label_encoder.fit_transform(X[feature])
-    
-        X_train, X_test, y_train, y_test = train_test_split(X_encoded, y, test_size=0.2, random_state=42)
-    
-        regressor = LinearRegression()
-        regressor.fit(X_train, y_train)
-    
-        y_pred = regressor.predict(X_test)
-        result_df = pd.DataFrame({"Predicted Quantity": y_pred, "Actual Quantity": y_test})
-        return result_df
+        return df
 
 
 
@@ -98,9 +81,13 @@ def main():
 
     
     
-    table_name = f"{dbt.this.identifier}__dbt_tmp"
+    # incremental materialization
+    
+    table_name = dbt.this.identifier
+    
     
     materialize(final_df, table=table_name.upper(), session=oml)
     return pd.DataFrame.from_dict({"result": [1]})
 
+  
   

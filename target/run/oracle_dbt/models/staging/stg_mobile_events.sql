@@ -1,6 +1,6 @@
 
       merge  into FAWDBTCORE.stg_mobile_events DBT_INTERNAL_DEST
-          using o$pt_stg_mobile_events104007770389 DBT_INTERNAL_SOURCE
+          using o$pt_stg_mobile_events095223694137 DBT_INTERNAL_SOURCE
           on (
             DBT_INTERNAL_SOURCE.EVENT_ID = DBT_INTERNAL_DEST.EVENT_ID
         )

@@ -21,7 +21,7 @@ def main():
 
 
     def source(*args, dbt_load_df_function):
-        sources = {"FAWDBTCORE.web_order_info": "FAWDBTCORE.web_order_info"}
+        sources = {"FAWDBTCORE.requisitions": "FAWDBTCORE.requisitions"}
         key = ".".join(args)
         schema, table = sources[key].split(".")
         # Use oml.sync(schema=schema, table=table)
@@ -43,9 +43,9 @@ def main():
         """dbt.this() or dbt.this.identifier"""
         database = "None"
         schema = "FAWDBTCORE"
-        identifier = "regression"
+        identifier = "requisition_anomaly"
         def __repr__(self):
-            return "FAWDBTCORE.regression"
+            return "FAWDBTCORE.requisition_anomaly"
 
 
     class dbtObj:
@@ -56,32 +56,44 @@ def main():
             self.this = this()
             self.is_incremental = False
 
-    from sklearn.model_selection import train_test_split
-    from sklearn.linear_model import LinearRegression
+    import pandas as pd
+    from sklearn.ensemble import IsolationForest
     from sklearn.preprocessing import LabelEncoder
     
+    import numpy as np
+    from sklearn.preprocessing import OrdinalEncoder
     def model(dbt, session):
+    
         dbt.config(materialized="table")
+        dbt.config(async_flag=True)  # run the python function in async mode
+        dbt.config(timeout=1800)  # timeout of 30 minutes
+        data = dbt.source("FAWDBTCORE", "requisitions")
+        data = data.pull()
+        df = data.dropna(axis = 1, how = "any")
+        df = df.dropna(axis = 0, how = "all")
+        #df = df.dropna()
+        cat = df.select_dtypes(include="object").columns.tolist()
     
-        s_df = dbt.source("FAWDBTCORE", "web_order_info")
-        df = s_df.pull()
+        df[cat]=df[cat].astype("str")
+        data = df.apply(LabelEncoder().fit_transform)
+        data = data.loc[:, (df != 0).any(axis=0)]
+        features = data.columns
     
-        X = df[["PRICE", "CATEGORY", "PAYMENT_TYPE"]]
-        y = df["QUANTITY"]
+        # Train the Isolation Forest model
+        model = IsolationForest(n_estimators=100, contamination="auto")
+        model.fit(data[features])
     
-        label_encoder = LabelEncoder()
-        X_encoded = X.copy()
-        for feature in ["CATEGORY", "PAYMENT_TYPE"]:
-            X_encoded[feature] = label_encoder.fit_transform(X[feature])
+        # Predict the anomalies
+        anomalies = model.predict(data[features])
     
-        X_train, X_test, y_train, y_test = train_test_split(X_encoded, y, test_size=0.2, random_state=42)
+        # Add the anomalies to the original data
+        data["anomaly"] = anomalies
     
-        regressor = LinearRegression()
-        regressor.fit(X_train, y_train)
+        # Print the anomalies
+        res_df = data[data["anomaly"] == -1]
     
-        y_pred = regressor.predict(X_test)
-        result_df = pd.DataFrame({"Predicted Quantity": y_pred, "Actual Quantity": y_test})
-        return result_df
+    
+        return data
 
 
 
